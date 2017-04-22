@@ -12,9 +12,9 @@ namespace AutocompleteTextboxProject
 {
     public partial class AutocompleteTextBox : TextBox
     {
-        public event EventHandler ItemAdded;
-
         List<string> _valueList;
+
+        public event EventHandler ItemAdded;
 
         #region Contruction
 
@@ -32,6 +32,18 @@ namespace AutocompleteTextboxProject
 
         #endregion
 
+        #region Properties
+
+        public List<string> ValueList
+        {
+            get { return _valueList; }
+            set { _valueList = value; }
+        }
+
+        #endregion
+
+        #region Helpers functions
+
         private void AddValueToList(string value)
         {
             if (value == string.Empty)
@@ -40,6 +52,10 @@ namespace AutocompleteTextboxProject
             _valueList.Add(value);
             ItemAdded?.Invoke(this, null);
         }
+
+        #endregion
+
+        #region Events handling
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
@@ -55,5 +71,7 @@ namespace AutocompleteTextboxProject
 
             base.OnKeyDown(e);
         }
+
+        #endregion
     }
 }
